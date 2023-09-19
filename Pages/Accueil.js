@@ -9,7 +9,7 @@ const AppIcon = require('../assets/icon.png');
 export default function Accueil() {
 
     const navigation = useNavigation();
-    
+
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     image: {
-        width: 250,
-        height: 250
+        width: 150,
+        height: 150
     },
     ButtonContainer: {
         marginTop: 100,
