@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet} from 'react-native';
+import { View, Text, Button, StyleSheet,SafeAreaView} from 'react-native';
 import { Input } from 'react-native-elements';
 import { useForm, Controller } from 'react-hook-form';
 import SelectAlerte from '../Components/FormSelectAlerte';
+import DescriptionInput from '../Components/DescriptionInput';
+import MapView from '../Components/Mapview';
 
 export default function Formulaire() {
 
@@ -13,25 +15,14 @@ export default function Formulaire() {
   };
   
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.container}>
       <SelectAlerte ></SelectAlerte>
       </View>
-      <Controller
-        name="name" // Make sure this matches the input field name
-        control={control}
-        defaultValue=""
-        rules={{ required: 'Name is required' }}
-        render={({ field }) => (
-          <Input
-            placeholder="Enter your name"
-            onChangeText={field.onChange}
-            value={field.value}
-          />
-        )}
-      />
+      <DescriptionInput></DescriptionInput>
+      <MapView></MapView>
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-    </View>
+      </SafeAreaView>
   );
 }
 

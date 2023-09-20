@@ -2,6 +2,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+#import <GoogleMaps/GoogleMaps.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -10,6 +12,8 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
+
+  [GMSServices provideAPIKey:@"9ca520b4cfb04744aeca8b8c09e3b031"]; // add this line using the api key obtained from Google Console
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
