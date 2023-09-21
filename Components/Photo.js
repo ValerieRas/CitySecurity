@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, Image, StyleSheet } from 'react-native';
+import { View, Button, Image, StyleSheet, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-const ImagePickerComponent = () => {
+export default function ImagePickerComponent() {
   const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => {
@@ -58,16 +58,18 @@ const ImagePickerComponent = () => {
 
   return (
     <View >
-        <View style={styles.Container}>
-            <Button title="Galerie photo" onPress={handleImagePicker} />
-            <Button title="Appareil photo" onPress={handleCamera} />
-            <Button title="Supprimer photo" onPress={DeletePhoto}/>
+        <View style={styles.ButtonContainer}>
+            <Button style={styles.button} title="Galerie" onPress={handleImagePicker}/>
+            <Button style={styles.button} title="Appareil photo" onPress={handleCamera}/>
+            <Button style={styles.button} title="Supprimer" onPress={DeletePhoto}/>
         </View>
       {imageUri && (
         <View style={styles.imageContainer}>
           <Image source={{ uri: imageUri }} style={styles.image} />
         </View>
       )}
+
+
     </View>
   );
 };
@@ -78,13 +80,16 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   image: {
-    width: 390,
-    height: 400,
+    width: 330,
+    height: 300,
   },
-  Container:{
+  ButtonContainer:{
     flexDirection:'row',
-    marginLeft: 5,
+    justifyContent: 'space-between',
+  },
+  button:{
+    width: 10,
+    
   }
 });
 
-export default ImagePickerComponent;

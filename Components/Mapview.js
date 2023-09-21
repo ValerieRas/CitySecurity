@@ -86,7 +86,7 @@ export default function Map() {
     const { latitude, longitude } = e.nativeEvent.coordinate;
     setMarkerPosition({ latitude, longitude });
     getAddressForCoordinate(e.nativeEvent.coordinate);
-    
+
   };
 
 
@@ -125,7 +125,14 @@ export default function Map() {
         <MapView
           provider="google"
           style={styles.map}
-        ></MapView>
+          onPress={(e) => handleMapTap(e)}
+        >
+          <Marker
+            coordinate={markerPosition}
+            description={address}
+          />
+
+        </MapView>
       )}
 
     </View>
@@ -134,9 +141,8 @@ export default function Map() {
 
 const styles = StyleSheet.create({
   map: {
-    margin: 10,
-    width:390,
-    height: 400,
+    width:330,
+    height: 300,
   },
   addressText: {
     fontSize: 16,
@@ -147,9 +153,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   input:{
-    width:390,
+    width:330,
     borderWidth: 1,
     borderColor: 'grey',
-    margin: 10,
+    padding: 10,
+    marginVertical: 20
   }
 });

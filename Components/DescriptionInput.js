@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
 const DescriptionInput= () => {
+  
   const [value, onChangeText] = React.useState('');
 
 
@@ -22,10 +23,8 @@ const DescriptionInput= () => {
 const styles = StyleSheet.create({
   input: {
     height: 80,
-    margin: 12,
     borderWidth: 1,
     borderColor: 'grey',
-    padding: 10,
   },
 });
 

@@ -12,7 +12,7 @@ export default function SelectAlerte() {
             data={TypeAlerte}
             defaultButtonText={"Type d'alerte"}
             dropdownStyle={{ backgroundColor: 'lightgray' }} 
-            buttonStyle={{ backgroundColor: '#ffd33d',  width: 400, height: 40 }}    
+            buttonStyle={{ backgroundColor: '#ffd33d',  width: 340, height: 40 }}    
             rowStyle={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}
             buttonTextStyle={{ fontSize: 16, color:'grey'}}
             onSelect={(selectedItem, index) => {

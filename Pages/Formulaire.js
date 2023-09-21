@@ -7,10 +7,12 @@ import MapView from '../Components/Mapview';
 import DateHeure from '../Components/DateHeure';
 import Photo from '../Components/Photo';
 import InputPersonne from '../Components/InputPersonne';
+import ButtonSubmit from '../Components/ButtonSubmit';
 
 export default function Formulaire() {
 
   const { control, handleSubmit, errors } = useForm();
+
   const onSubmit = data => {
     // Handle form submission here
     console.log(data);
@@ -27,8 +29,8 @@ export default function Formulaire() {
     <TouchableWithoutFeedback onPress={handleScreenPress}>
 
       <SafeAreaView >
-        <View Style={styles.container}>
-          
+        <View style={styles.container}>
+
           <View style={styles.Select}>
             <SelectAlerte ></SelectAlerte>
           </View>
@@ -51,7 +53,8 @@ export default function Formulaire() {
             <InputPersonne></InputPersonne>
           </View>
 
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+          <ButtonSubmit theme="primary" label="Envoyer" onPress={() => onSubmit()}/>
+
         </View>
       </SafeAreaView>
 
@@ -68,8 +71,8 @@ const styles = StyleSheet.create({
     padding: 10
   },
   container:{
-    backgroundColor: 'pink',
-    margin:30,
+    backgroundColor: '#CFEBF4',
+    margin:20,
     padding :20
   }
 
