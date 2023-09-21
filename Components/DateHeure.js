@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Button, Platform, StyleSheet } from 'react-native';
+import { View, Button, Platform, StyleSheet, Text, TextInput} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-export default function DateTimePickerScreen() {
+export default function DateTime() {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -20,11 +20,17 @@ export default function DateTimePickerScreen() {
     setTime(currentTime);
   };
 
+  const handleInputFocus = () => {
+    setShowTimePicker(true);
+  };
+
   return (
     <View style={styles.container}>
-      <Button
-        onPress={() => setShowDatePicker(true)}
-        title="Date"
+      <Text>Date</Text>
+      <TextInput
+        onFocus={handleInputFocus}
+        value={date}
+        editable={false}
       />
       {showDatePicker && (
         <DateTimePicker
@@ -37,10 +43,11 @@ export default function DateTimePickerScreen() {
           editable={false}
         />
       )}
-
-      <Button
-        onPress={() => setShowTimePicker(true)}
-        title="Heure"
+      <Text>Heure</Text>
+      <TextInput
+        onFocus={handleInputFocus}
+        value={time}
+        editable={false}
       />
       {showTimePicker && (
         <DateTimePicker
@@ -58,6 +65,7 @@ export default function DateTimePickerScreen() {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flexDirection: 'row',
         justifyContent: 'center',

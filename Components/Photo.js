@@ -26,8 +26,14 @@ const ImagePickerComponent = () => {
       aspect: [4, 3],
       quality: 1,
     });
-      setImageUri(result.uri);
-    
+
+    if(!result.canceled){
+      setImageUri(result.assets[0].uri);
+    }
+
+
+
+  
   };
 
   const handleCamera = async () => {
@@ -38,16 +44,24 @@ const ImagePickerComponent = () => {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setImageUri(result.uri);
+    if(!result.canceled){
+      setImageUri(result.assets[0].uri);
     }
+
   };
+
+
+  const DeletePhoto = async () =>{
+    setImageUri(null);
+  }
+
 
   return (
     <View >
         <View style={styles.Container}>
-            <Button title="Select from Library" onPress={handleImagePicker} />
-            <Button title="Take a Picture" onPress={handleCamera} />
+            <Button title="Galerie photo" onPress={handleImagePicker} />
+            <Button title="Appareil photo" onPress={handleCamera} />
+            <Button title="Supprimer photo" onPress={DeletePhoto}/>
         </View>
       {imageUri && (
         <View style={styles.imageContainer}>
@@ -69,7 +83,7 @@ const styles = StyleSheet.create({
   },
   Container:{
     flexDirection:'row',
-    marginLeft: 40,
+    marginLeft: 5,
   }
 });
 

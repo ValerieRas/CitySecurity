@@ -6,6 +6,7 @@ import DescriptionInput from '../Components/DescriptionInput';
 import MapView from '../Components/Mapview';
 import DateHeure from '../Components/DateHeure';
 import Photo from '../Components/Photo';
+import InputPersonne from '../Components/InputPersonne';
 
 export default function Formulaire() {
 
@@ -21,30 +22,55 @@ export default function Formulaire() {
   };
 
   return (
-  
-      <TouchableWithoutFeedback onPress={handleScreenPress}>
-        <SafeAreaView>
-        <ScrollView>
-          <View style={styles.container}>
+    <ScrollView bounces="false" >
+
+    <TouchableWithoutFeedback onPress={handleScreenPress}>
+
+      <SafeAreaView >
+        <View Style={styles.container}>
+          
+          <View style={styles.Select}>
             <SelectAlerte ></SelectAlerte>
           </View>
-          <DescriptionInput></DescriptionInput>
-          <MapView></MapView>
-          <DateHeure></DateHeure>
-          <Photo></Photo>
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-        </ScrollView>
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
 
+          <View>
+            <DescriptionInput></DescriptionInput>
+          </View>
+
+          <MapView></MapView>
+
+          <View>
+            <DateHeure></DateHeure>
+          </View>
+
+          <View>
+            <Photo></Photo>
+          </View>
+
+          <View>
+            <InputPersonne></InputPersonne>
+          </View>
+
+          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+        </View>
+      </SafeAreaView>
+
+    </TouchableWithoutFeedback>
+
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  Select: {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10
   },
+  container:{
+    backgroundColor: 'pink',
+    margin:30,
+    padding :20
+  }
 
 })
