@@ -2,22 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Platform, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function DateTimePickerComponent() {
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(true); // Show date picker by default
-  const [showTimePicker, setShowTimePicker] = useState(true); // Show time picker by default
+
+export default function DateTimePickerComponent({ handleInputChange, date, time }) {
+
+  const [DateJour, setDate] = useState(new Date);
+  const [TimeHeure, setTime] = useState(new Date);
+  const [showDatePicker, setShowDatePicker] = useState(true);
+  const [showTimePicker, setShowTimePicker] = useState(true);
+
+
 
   const onChangeDate = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
+    const currentDate = selectedDate || DateJour;
     setShowDatePicker(Platform.OS === 'ios');
-    setDate(currentDate);
+
+      setDate(currentDate);
+      handleInputChange('date', selectedDate.toLocaleDateString());
+    
   };
 
   const onChangeTime = (event, selectedTime) => {
-    const currentTime = selectedTime || date;
+    const currentTime = selectedTime || TimeHeure;
     setShowTimePicker(Platform.OS === 'ios');
-    setTime(currentTime);
+
+      setTime(currentTime);
+      handleInputChange('time', selectedTime.toLocaleTimeString());
+    
+
   };
 
   useEffect(() => {
@@ -27,6 +38,7 @@ export default function DateTimePickerComponent() {
 
   }, []);
 
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -34,26 +46,30 @@ export default function DateTimePickerComponent() {
         {showDatePicker && (
           <DateTimePicker
             testID="datePicker"
-            value={date}
+            value={DateJour}
             mode="date"
             is24Hour={true}
             display="default"
-            onChange={onChangeDate}
+            onChange={(event, selectedDate) => {
+              onChangeDate(event, selectedDate);
+            }}
             editable={false}
           />
         )}
       </View>
 
       <View style={styles.row}>
-        <Text>Time:</Text>
+        <Text>Heure:</Text>
         {showTimePicker && (
           <DateTimePicker
             testID="timePicker"
-            value={date}
+            value={TimeHeure}
             mode="time"
             is24Hour={true}
             display="default"
-            onChange={onChangeTime}
+            onChange={(event, selectedTime) => {
+              onChangeTime(event, selectedTime);
+            }}
             editable={false}
           />
         )}
@@ -64,14 +80,14 @@ export default function DateTimePickerComponent() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical:20,
-    flexDirection: 'row', 
-    alignItems: 'center',  
+    paddingVertical: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   row: {
-    flexDirection: 'row',   
-    alignItems: 'center',  
-    marginRight: 45,       
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 45,
   },
 });
 

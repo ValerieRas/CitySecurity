@@ -4,18 +4,21 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from 'expo-location';
 
 
+
 // Set your Geocoding API key (get one from Google)
 const API_KEY = '9ca520b4cfb04744aeca8b8c09e3b031';
 
 
 
-export default function Map() {
+export default function Map({handleInputChange, adresse}) {
 
   const [location, setLocation] = useState(null);
 
   const [address, setAddress] = useState('');
 
   const [markerPosition, setMarkerPosition] = useState(null);
+
+
 
   useEffect(() => {
     (async () => {
@@ -64,7 +67,10 @@ export default function Map() {
           if (data.features && data.features.length > 0) {
 
             const firstResult = data.features[0];
+
             setAddress(firstResult.properties.formatted);
+
+            handleInputChange('Adresse', firstResult.properties.formatted);
 
           } else {
 
@@ -83,9 +89,14 @@ export default function Map() {
 
   // Function to handle map tap
   const handleMapTap = (e) => {
+
     const { latitude, longitude } = e.nativeEvent.coordinate;
+
     setMarkerPosition({ latitude, longitude });
+
     getAddressForCoordinate(e.nativeEvent.coordinate);
+
+  
 
   };
 
@@ -94,12 +105,16 @@ export default function Map() {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.search}>
         <TextInput
           style={styles.input}
           placeholder={address}
           value={address}
-          onChangeText={(text) => setAddress(text)}
+          onChangeText={(text) => {
+            setAddress(text);
+            handleInputChange('Adresse',text);
+          }}
         />
 
       </View>
@@ -143,6 +158,7 @@ const styles = StyleSheet.create({
   map: {
     width:330,
     height: 300,
+    borderRadius: 5
   },
   addressText: {
     fontSize: 16,
@@ -157,6 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'grey',
     padding: 10,
-    marginVertical: 20
+    marginVertical: 20,
+    borderRadius: 5
   }
 });

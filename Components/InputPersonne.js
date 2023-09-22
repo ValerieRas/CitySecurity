@@ -1,42 +1,57 @@
 import React from 'react';
-import {View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 
-const DescriptionInput = () => {
 
-    const [Nom, onChangeNom] = React.useState('');
-    const [Prenom, onChangePrenom] = React.useState('');
-    const [Mail, onChangeMail] = React.useState('');
+export default function PersonneInput({ handleInputChange, Nom, Prenom, Mail}) {
+
+    const [nom, onChangeNom] = React.useState('');
+    const [prenom, onChangePrenom] = React.useState('');
+    const [mail, onChangeMail] = React.useState('');
+
 
     return (
 
         <View>
-        <TextInput
-            label="Nom"
-            style={styles.input}
-            placeholder="Nom"
-            editable
-            onChangeText={text => onChangeNom(text)}
-            value={Nom}
-        />
+
+            <TextInput
+                label="Nom"
+                style={styles.input}
+                placeholder="Nom"
+                editable
+                onChangeText={(text) => {
+                    handleInputChange('Nom',text);
+                    onChangeNom(text);
+                  }}
+                value={nom}
+            />
 
 
-        <TextInput
-            label="Prenom"
-            style={styles.input}
-            placeholder="Prenom"
-            editable
-            onChangeText={text => onChangePrenom(text)}
-            value={Prenom}
-        /> 
 
-        <TextInput
-            label="Mail"
-            style={styles.input}
-            placeholder="Mail"
-            editable
-            onChangeText={text => onChangeMail(text)}
-            value={Mail}
-        />
+            <TextInput
+                label="Prenom"
+                style={styles.input}
+                placeholder="Prenom"
+                editable
+                onChangeText={(text) => {
+                    handleInputChange('Prenom',text);
+                    onChangePrenom(text);
+                  }}
+                value={prenom}
+            />
+
+
+
+            <TextInput
+                label="Mail"
+                style={styles.input}
+                placeholder="Mail"
+                editable
+                onChangeText={(text) => {
+                    handleInputChange('Mail',text);
+                    onChangeMail(text);
+                  }}
+                value={mail}
+            />
         </View>
     );
 };
@@ -47,7 +62,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'grey',
         padding: 10,
+        borderRadius: 5,
     },
 });
 
-export default DescriptionInput;

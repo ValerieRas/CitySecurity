@@ -1,22 +1,26 @@
 import React from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 
-const DescriptionInput= () => {
-  
+export default function DescriptionInput({ handleInputChange, incidentDescription }) {
+
   const [value, onChangeText] = React.useState('');
 
-
   return (
-      <TextInput
-        style={styles.input}
-        placeholder="Description de l'incident"
-        editable
-        multiline
-        numberOfLines={4}
-        maxLength={40}
-        onChangeText={text => onChangeText(text)}
-        value={value}
-      />
+
+
+    <TextInput
+      style={styles.input}
+      placeholder="Description de l'incident"
+      editable
+      multiline
+      numberOfLines={4}
+      maxLength={40}
+      onChangeText={(text) => {
+        handleInputChange(text);
+        onChangeText(text);
+      }}
+      value={value}
+    />
   );
 };
 
@@ -25,7 +29,8 @@ const styles = StyleSheet.create({
     height: 80,
     borderWidth: 1,
     borderColor: 'grey',
+    borderRadius: 5,
   },
 });
 
-export default DescriptionInput;
+;

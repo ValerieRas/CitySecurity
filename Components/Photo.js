@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Button, Image, StyleSheet, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function ImagePickerComponent() {
-  const [imageUri, setImageUri] = useState(null);
+
+
+export default function ImagePickerComponent({handleInputChange, imageUri}) {
+  
+  const [ImageUri, setImageUri] = useState(null);
+
 
   useEffect(() => {
     (async () => {
@@ -28,7 +32,11 @@ export default function ImagePickerComponent() {
     });
 
     if(!result.canceled){
+
       setImageUri(result.assets[0].uri);
+
+      handleInputChange('imageUri',result.assets[0].uri);
+
     }
 
 
@@ -45,7 +53,11 @@ export default function ImagePickerComponent() {
     });
 
     if(!result.canceled){
+
       setImageUri(result.assets[0].uri);
+
+      handleInputChange('imageUri',result.assets[0].uri)
+      
     }
 
   };
@@ -53,26 +65,26 @@ export default function ImagePickerComponent() {
 
   const DeletePhoto = async () =>{
     setImageUri(null);
+
+    handleInputChange('imageUri',null)
   }
 
 
   return (
-    <View >
-        <View style={styles.ButtonContainer}>
-            <Button style={styles.button} title="Galerie" onPress={handleImagePicker}/>
-            <Button style={styles.button} title="Appareil photo" onPress={handleCamera}/>
-            <Button style={styles.button} title="Supprimer" onPress={DeletePhoto}/>
-        </View>
-      {imageUri && (
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: imageUri }} style={styles.image} />
-        </View>
-      )}
-
-
+    <View>
+          <View style={styles.ButtonContainer}>
+            <Button title="Galerie" onPress={handleImagePicker} />
+            <Button title="Appareil photo" onPress={handleCamera} />
+            <Button title="Supprimer" onPress={DeletePhoto} />
+          </View>
+          {ImageUri && (
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: ImageUri }} style={styles.image} />
+            </View>
+          )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   imageContainer: {
